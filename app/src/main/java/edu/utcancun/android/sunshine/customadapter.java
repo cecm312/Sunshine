@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
  */
 public class customadapter extends ArrayAdapter{
     public customadapter(Context context, String[] resource) {
-        super(context, R.layout.list_item_forecast,resource);
+
 
     }
 }
