@@ -2,25 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/pronostico_day" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/pronostico_status" />
+        android:id="@+id/pronostico_day"
+        android:textSize="@dimen/abc_action_button_min_width_material"
+        android:clickable="false"/>
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clickable="false">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pronostic_image"
+            android:clickable="false"/>
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Large Text"
+        android:id="@+id/pronostico_status"
+        android:textSize="@dimen/abc_dialog_padding_top_material"
+            android:clickable="false"/>
+
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Medium Text"
-        android:id="@+id/pronostico_temperatures" />
+        android:id="@+id/pronostico_temperatures"
+        android:textAlignment="@integer/abc_max_action_buttons"
+            android:clickable="false"
+        android:textSize="@dimen/abc_text_size_large_material" />
+    </LinearLayout>
+
 </LinearLayout>

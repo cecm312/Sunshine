@@ -7,10 +7,12 @@ public class Pronostic {
     public String day;
     public String status;
     public String temperatures;
+    public int img;
 
-    public Pronostic(String day, String status,String temperatures){
+    public Pronostic(String day, String status,String temperatures,int img){
         this.day=day;
         this.status=status;
         this.temperatures=temperatures;
+        this.img=img;
     }
 }

@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,14 +33,23 @@ public class MainActivityFragment extends Fragment {
                 lista
         );*/
         ArrayList<Pronostic> pronosticos=new ArrayList<Pronostic>();
-        pronosticos.add(new Pronostic("Lunes","Nublado","20º/35º"));
-        pronosticos.add(new Pronostic("Martes","Nublado","20º/35º"));
-        pronosticos.add(new Pronostic("Miercoles","Nublado","20º/35º"));
-        pronosticos.add(new Pronostic("Jueves","Nublado","20º/35º"));
-        pronosticos.add(new Pronostic("Viernes","Nublado","20º/35º"));
+        pronosticos.add(new Pronostic("Lunes","Soleado","20º/35º",R.drawable.soleado));
+        pronosticos.add(new Pronostic("Martes","Soleado","20º/35º",R.drawable.soleado));
+        pronosticos.add(new Pronostic("Miercoles","Llovizna","20º/35º",R.drawable.lloviendo));
+        pronosticos.add(new Pronostic("Jueves","Soleado","20º/35º",R.drawable.soleado));
+        pronosticos.add(new Pronostic("Viernes","Lovizna","20º/35º",R.drawable.lloviendo));
         PronosticAdapter adapter=new PronosticAdapter(getActivity(),pronosticos);
         ListView listView=(ListView)rootView.findViewById(R.id.list_item_forecast);
         listView.setAdapter(adapter);
+        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View container, int position, long id) {
+                TextView pronosticDay= (TextView) container.findViewById(R.id.pronostico_day);
+                Toast.makeText(getActivity(),pronosticDay.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        };
+        listView.setOnItemClickListener(itemClickListener);
         return rootView;
+
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,9 +26,11 @@ public class PronosticAdapter extends ArrayAdapter<Pronostic>{
         TextView pronosticDay=(TextView)convertView.findViewById(R.id.pronostico_day);
         TextView pronosticStatus=(TextView)convertView.findViewById(R.id.pronostico_status);
         TextView pronosticTemperatures=(TextView)convertView.findViewById(R.id.pronostico_temperatures);
+        ImageView pronosticImage= (ImageView) convertView.findViewById(R.id.pronostic_image);
         pronosticDay.setText(pronostico.day);
         pronosticStatus.setText(pronostico.status);
         pronosticTemperatures.setText(pronostico.temperatures);
+        pronosticImage.setImageResource(pronostico.img);
         return convertView;
     };
 
