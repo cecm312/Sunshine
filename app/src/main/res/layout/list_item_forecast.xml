@@ -33,7 +33,6 @@
         android:textSize="@dimen/abc_dialog_padding_top_material"
             android:clickable="false"/>
 
-
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

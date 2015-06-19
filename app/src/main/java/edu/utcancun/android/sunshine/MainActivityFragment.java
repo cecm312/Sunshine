@@ -2,6 +2,7 @@ package edu.utcancun.android.sunshine;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +13,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -40,17 +50,53 @@ public class MainActivityFragment extends Fragment {
         pronosticos.add(new Pronostic("Martes","Soleado","20º/35º",R.drawable.soleado));
         pronosticos.add(new Pronostic("Miercoles","Llovizna","20º/35º",R.drawable.lloviendo));
         pronosticos.add(new Pronostic("Jueves","Soleado","20º/35º",R.drawable.soleado));
-        pronosticos.add(new Pronostic("Viernes","Lovizna","20º/35º",R.drawable.lloviendo));
+        pronosticos.add(new Pronostic("Viernes", "Lovizna", "20º/35º", R.drawable.lloviendo));
+
+
         PronosticAdapter adapter=new PronosticAdapter(getActivity(),pronosticos);
-        ListView listView=(ListView)rootView.findViewById(R.id.list_item_forecast);
+        ListView listView = (ListView)rootView.findViewById(R.id.list_item_forecast);
         listView.setAdapter(adapter);
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View container, int position, long id) {
-
                 Intent intate=new Intent(getActivity(),main2.class);
-                Bundle bolsa=new Bundle();
+                intate.putExtra("pronostico",pronosticos.get(position));
                 startActivity(intate);
+
+
+                HttpURLConnection con = null ;
+                InputStream is = null;
+                String data="";
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+                StrictMode.setThreadPolicy(policy);
+                try {
+                    con = (HttpURLConnection) ( new URL("http://api.openweathermap.org/data/2.5/forecast/daily?APPID=143ffc47ae963adf95c8e2a4ccf660e3&q=Cancun&cnt=5&mode=json&units=metric")).openConnection();
+                    con.setRequestMethod("GET");
+                    con.setDoInput(true);
+                    con.setDoOutput(true);
+                    con.connect();
+
+                    // Let's read the response
+                    StringBuffer buffer = new StringBuffer();
+                    is = con.getInputStream();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    String line = null;
+                    while (  (line = br.readLine()) != null )
+                        buffer.append(line + "\r\n");
+                    is.close();
+                    con.disconnect();
+                    data=buffer.toString();
+                }
+                catch(Throwable t) {
+                    t.printStackTrace();
+                }
+                finally {
+                    try { is.close(); } catch(Throwable t) {}
+                    try { con.disconnect(); } catch(Throwable t) {}
+                }
+                Toast.makeText(getActivity(), data, Toast.LENGTH_LONG);
+
             }
         };
         listView.setOnItemClickListener(itemClickListener);

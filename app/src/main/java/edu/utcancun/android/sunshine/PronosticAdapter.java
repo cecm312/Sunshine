@@ -27,10 +27,10 @@ public class PronosticAdapter extends ArrayAdapter<Pronostic>{
         TextView pronosticStatus=(TextView)convertView.findViewById(R.id.pronostico_status);
         TextView pronosticTemperatures=(TextView)convertView.findViewById(R.id.pronostico_temperatures);
         ImageView pronosticImage= (ImageView) convertView.findViewById(R.id.pronostic_image);
-        pronosticDay.setText(pronostico.day);
-        pronosticStatus.setText(pronostico.status);
-        pronosticTemperatures.setText(pronostico.temperatures);
-        pronosticImage.setImageResource(pronostico.img);
+        pronosticDay.setText(pronostico.getDay());
+        pronosticStatus.setText(pronostico.getStatus());
+        pronosticTemperatures.setText(pronostico.getTemperatures());
+        pronosticImage.setImageResource(pronostico.getImg());
         return convertView;
     };
 
