@@ -1,5 +1,7 @@
 package edu.utcancun.android.sunshine;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 
@@ -32,7 +35,7 @@ public class MainActivityFragment extends Fragment {
                 R.id.list_item_forecast_textview,
                 lista
         );*/
-        ArrayList<Pronostic> pronosticos=new ArrayList<Pronostic>();
+        final ArrayList<Pronostic> pronosticos=new ArrayList<Pronostic>();
         pronosticos.add(new Pronostic("Lunes","Soleado","20º/35º",R.drawable.soleado));
         pronosticos.add(new Pronostic("Martes","Soleado","20º/35º",R.drawable.soleado));
         pronosticos.add(new Pronostic("Miercoles","Llovizna","20º/35º",R.drawable.lloviendo));
@@ -44,8 +47,10 @@ public class MainActivityFragment extends Fragment {
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View container, int position, long id) {
-                TextView pronosticDay= (TextView) container.findViewById(R.id.pronostico_day);
-                Toast.makeText(getActivity(),pronosticDay.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                Intent intate=new Intent(getActivity(),main2.class);
+                Bundle bolsa=new Bundle();
+                startActivity(intate);
             }
         };
         listView.setOnItemClickListener(itemClickListener);

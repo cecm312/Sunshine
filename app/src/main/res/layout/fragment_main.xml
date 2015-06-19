@@ -11,6 +11,4 @@
         android:id="@+id/list_item_forecast"/>
 
 
-
-
 </FrameLayout>
